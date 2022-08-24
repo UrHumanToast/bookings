@@ -1,9 +1,42 @@
 {{template "base" .}}
 
 {{define "content"}}
-<div class="container mt-3">
+<div class="container mt-3 d-flex ">
+    <div class="row justify-content-center">
 
-<h1>Large Rooms</h1>
+        <div class=" col-lg-6 col-sm-12">
+            <div class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/static/images/ameneties/architecture.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/images/food/breakfast2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/images/suites/large-room.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-sm-12">
+            <h3>Large Rooms</h3>
+            <p><b><em>Party Room</em></b>. You plan on bringing a lot of people, and plan on being loud. You need
+                multiple rooms. Consider a room which contians either three
+                queen, or two king beds, a bar, two separate restrooms (one shower, one bathing area), and an eighty
+                inch tv. The room is equiped with high quality sound proofing, and large speakers. This is the
+                designated party room.</p>
+            <p><b><em>The CEO.</em></b> You know what you want, and what you don't want. Have it all, or have it all to
+                yourself. We offer an array of these luxury suites, and you bet we have one designed just for you.
+                Beyond the basics (90 inch TV, high quality sound system,full sized restroom with both a shower and a
+                bathing area), our largest
+                suites are equipped with a full bar, kitchen, and more. Call ahead for custom furnishing, such as a
+                grand piano, or for a detailed
+                layout for the room of your choice.</p>
+        </div>
+    </div>
 </div>
 {{end}}
 

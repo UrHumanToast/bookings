@@ -1,21 +1,58 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>This is the support page.</h1>
 
-                <p>This came from the template: {{index .StringMap "test"}}</p>
-         
-                <p>
-                    {{if ne (index .StringMap "remote_ip") ""}}
-                        Your remote IP address is {{index .StringMap "remote_ip"}}
-                    {{else}}
-                        I don't know your IP address yet. Visit the <a href="/">Home page</a> so I can set it.
-                    {{end}}
-                </p>
+<div class="container my-form">
+
+    <form action="/contact-complete">
+        <!--method="POST"-->
+        <fieldset>
+            <legend class="mt-3">Contact Us!</legend>
+
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="thoughts-wrapping">Reason</span>
+                <select id="cnt-thoughts" name="cnt-thoughts" class="form-select"
+                    aria-describedby="An droption menu to pick customer support type." required>
+                    <option selected>General Customer Support</option>
+                    <option>Question About Service</option>
+                    <option>Question About Rooms</option>
+                    <option>Question About Ameneties</option>
+                </select>
             </div>
-        </div>
-    </div>
+
+            <div class="input-group input-group-sm mb-3">
+
+                <input type="text" id="ctc-name" name="ctc-name" class="form-control" placeholder="Full Name"
+                    aria-describedby="An area to input your name or username." required>
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" id="ctc-email1" name="ctc-email1" class="form-control"
+                    aria-describedby="An area to input your first part of your email before the at symbol."
+                    placeholder="email" required>
+                <span class="input-group-text" id="email-wrapping">@</span>
+                <input type="text" id="ctc-email2" name="ctc-email2" class="form-control"
+                    aria-describedby="An area to input second part of your email, such as: at example dot com."
+                    placeholder="example.com" pattern="\w+\.\w+">
+            </div>
+
+            <div class="input-group input-group-sm">
+                <textarea class="form-control" id="ctc-msg" name="ctc-msg" style="resize: none;"
+                    placeholder="Decription"></textarea>
+            </div>
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+{{end}}
+
+{{define "js"}}
+<script type="text/javascript">
+
+</script>
 {{end}}

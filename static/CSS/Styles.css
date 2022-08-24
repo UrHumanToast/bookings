@@ -1,0 +1,25 @@
+/**
+*	NAME: Aaron Meek
+*	DATE: 2022 - 08 - 15
+*
+*	This contains some basic styling
+ */
+
+ .my-footer {
+    height: 5em;
+    text-align: center;
+    color: #F1FAEE;
+}
+
+.my-form {
+    min-width: 15em;
+    max-width: 30%;
+}
+
+.footer {
+    position: relative;
+    margin-top: -150px; /* negative value of footer height */
+    height: 150px;
+    clear:both;
+    padding-top:20px;
+  } 
