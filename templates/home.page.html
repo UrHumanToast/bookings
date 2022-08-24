@@ -1,13 +1,131 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>This is the eHome page.</h1>
-
-                <p>Visit the <a href="/about">About</a> page here.</p> 
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-2"> </div>
+        <div class="col-8 card p-0">
+            <div class="card-header">
+                <h5 class="text-center">Welcome to Canadas Largest Retreat</h5>
+                <ul class="nav nav-tabs mb-1">
+                    <li class="nav-item">
+                        <h5 class="nav-link" aria-current="true" id="eat" onclick="cardNav(this.id)">Eat</h5>
+                    </li>
+                    <li class="nav-item">
+                        <h5 class="nav-link" aria-current="false" id="sleep" onclick="cardNav(this.id)">Sleep</h5>
+                    </li>
+                    <li class="nav-item">
+                        <h5 class="nav-link" aria-current="false" id="repeat" onclick="cardNav(this.id)">Retreat</h5>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <h5 class="card-title" id="cardDesc"></h5>
+                </div>
+                <!-- DYNAMIC CARDS -->
+                <div class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="cardCarousel">
+                    </div>
+                </div>
+                <div class="mt-2 text-center">
+                    <a href="/book" class="btn btn-dark">Book Now</a>
+                </div>
             </div>
         </div>
+        <div class="col-2"></div>
     </div>
+</div>
+{{end}}
+
+{{define "js"}}
+<script type="text/javascript">
+
+    const cards = [
+        document.getElementById("eat"),
+        document.getElementById("sleep"),
+        document.getElementById("repeat"),
+    ];
+
+    const data = [
+        {
+            id: "eat",
+            desc: "Our dining hall prepares fresh food",
+            img: [
+                "/static/images/food/breakfast1.jpg",
+                "/static/images/food/breakfast2.jpg",
+                "/static/images/food/breakfast3.jpg",
+                "/static/images/food/coffee1.jpg",
+                "/static/images/food/coffee2.jpg",
+            ],
+            imgAlt: "Pictures of varying foods",
+        },
+        {
+            id: "sleep",
+            desc: "Stay in one of our luxurious suites",
+            img: [
+                "/static/images/suites/small-room.jpg",
+                "/static/images/suites/medium-room.jpg",
+                "/static/images/suites/large-room.jpg",
+            ],
+            imgAlt: "Pictures of varying foods",
+        },
+        {
+            id: "repeat",
+            desc: "Visit various amenities, open all week",
+            img: [
+                "/static/images/ameneties/tennis.jpg",
+                "/static/images/ameneties/golf.jpg",
+                "/static/images/ameneties/indoor-pool.jpg",
+                "/static/images/ameneties/outdoor-pool.jpg",
+                "/static/images/ameneties/library.jpg",
+                "/static/images/ameneties/architecture.jpg",
+            ],
+            imgAlt: "Pictures of varying foods",
+        },
+    ];
+
+
+    function cardNav(clickedOn) {
+
+        document.getElementById("cardCarousel").innerHTML = ``;
+
+        cards.forEach(c => {
+            if (c.id == clickedOn) {
+                c.classList = "nav-link active";
+
+                data.forEach(d => {
+                    if (d.id == clickedOn) {
+                        var i = 0;
+                        document.getElementById("cardDesc").innerText = d.desc;
+
+                        d.img.forEach(img => {
+                            console.log(img);
+                            document.getElementById("cardCarousel").innerHTML += `
+                             <div class="carousel-item ${(i++ ? "" : "active")}">
+                                 <img src="${img}" class="d-block w-100" alt="${d.imgAlt}">
+                             </div>`;
+                        });
+                    }
+                });
+            }
+            else
+                c.classList = "nav-link";
+        });
+    }
+
+    function load() {
+        var i = 0;
+        cards[0].classList = "nav-link active";
+        document.getElementById("cardDesc").innerText = data[0].desc;
+        document.getElementById("cardCarousel").innerHTML = ``;
+        data[0].img.forEach(img => {
+            document.getElementById("cardCarousel").innerHTML += `
+                             <div class="carousel-item ${(i++ ? "" : "active")}">
+                                 <img src="${img}" class="d-block w-100 img-thumbnail" alt="${data[0].imgAlt}">
+                             </div>`;
+        });
+
+    }
+
+    load();
+</script>
 {{end}}

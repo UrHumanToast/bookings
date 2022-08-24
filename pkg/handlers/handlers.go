@@ -47,3 +47,23 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
+
+// SmallRooms - The small rooms page handler
+func (m *Repository) SmallRooms(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "small-rooms.page.html", &models.TemplateData{})
+}
+
+// MediumRooms - The medium rooms page handler
+func (m *Repository) MiddleRooms(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "middle-rooms.page.html", &models.TemplateData{})
+}
+
+// LargeRooms - The large rooms page handler
+func (m *Repository) LargeRooms(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "large-rooms.page.html", &models.TemplateData{})
+}
+
+// Support - The support page handler
+func (m *Repository) Support(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "support.page.html", &models.TemplateData{})
+}
