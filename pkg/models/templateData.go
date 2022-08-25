@@ -1,3 +1,9 @@
+/**
+*	NAME: Aaron Meek
+*	DATE: 2022 - 08 - 24
+*
+*	This contains the template data/page struct
+ */
 package models
 
 // TemplateData - Holds data sent from handlers to template

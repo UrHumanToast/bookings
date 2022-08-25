@@ -1,3 +1,9 @@
+/**
+*	NAME: Aaron Meek
+*	DATE: 2022 - 08 - 24
+*
+*	This contains the page handlers
+ */
 package handlers
 
 import (
@@ -29,8 +35,6 @@ func NewHandlers(r *Repository) {
 
 // Home - The home page handler
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
 	render.RenderTemplate(w, "home.page.html", &models.TemplateData{})
 }
 
@@ -42,7 +46,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	remoteIp := m.App.Session.GetString(r.Context(), "remote_ip")
 	stringMap["remote_ip"] = remoteIp
 
-	// Send the data to the template page, and render the page
+	// Send the data to the template page (as a test), and render the page
 	render.RenderTemplate(w, "about.page.html", &models.TemplateData{
 		StringMap: stringMap,
 	})
