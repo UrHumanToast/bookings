@@ -7,14 +7,16 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/urhumantoast/bookings/pkg/config"
-	"github.com/urhumantoast/bookings/pkg/handlers"
-	"github.com/urhumantoast/bookings/pkg/render"
+	"github.com/urhumantoast/bookings/internal/config"
+	"github.com/urhumantoast/bookings/internal/handlers"
+	"github.com/urhumantoast/bookings/internal/models"
+	"github.com/urhumantoast/bookings/internal/render"
 
 	"github.com/alexedwards/scs/v2"
 )
@@ -25,6 +27,9 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+	// Putting things into the session
+	gob.Register(models.Reservation{})
+
 	app.InProduction = false
 
 	session = scs.New()

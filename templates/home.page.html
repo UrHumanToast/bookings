@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="mt-2 text-center">
-                    <a href="/book" class="btn btn-dark">Book Now</a>
+                    <a href="/book-reservation" class="btn btn-dark">Book a reservaton</a>
                 </div>
             </div>
         </div>
@@ -127,5 +127,12 @@
     }
 
     load();
+
+    // Prompt warning message
+    attention.warning({
+        title: "EAT-SLEEP-RETREAT",
+        msg: "Welcome! This project is undergoing re-development",
+        footer: "There are plenty of features to come, such as user logins and authentication. This website uses CSRF tokens, and a back-end I built in Golang. It performs form validation, session management, page tempalte rendering, and more. Future updates involve a database using PostgreSQL, actual booking & reservations, caching, sessions, image updates; among other things."
+    });
 </script>
 {{end}}

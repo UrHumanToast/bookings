@@ -13,8 +13,9 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/urhumantoast/bookings/pkg/config"
-	"github.com/urhumantoast/bookings/pkg/models"
+	"github.com/justinas/nosurf"
+	"github.com/urhumantoast/bookings/internal/config"
+	"github.com/urhumantoast/bookings/internal/models"
 )
 
 var app *config.AppConfig
@@ -24,12 +25,17 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+// AddDefaultData - Adds data for all templates (default)
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.Flash = app.Session.PopString(r.Context(), "flash")
+	td.Error = app.Session.PopString(r.Context(), "error")
+	td.Warning = app.Session.PopString(r.Context(), "warning")
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // RenderTemplate - Renders template using HTML template
-func RenderTemplate(w http.ResponseWriter, tmpl_name string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl_name string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	// Get the template cache from the app config
@@ -52,7 +58,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl_name string, td *models.Template
 	// Render the page
 	buf := new(bytes.Buffer)
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 
 	err := t.Execute(buf, td)
 	if err != nil {

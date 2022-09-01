@@ -2,20 +2,36 @@
 
 {{define "content"}}
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h1>This is the testing about page.</h1>
-            <!-- TESTING SESSION -->
-            <p>This came from the template: {{index .StringMap "test"}}</p>
-
-            <p>
-                {{if ne (index .StringMap "remote_ip") ""}}
-                Your remote IP address is {{index .StringMap "remote_ip"}}
-                {{else}}
-                I don't know your IP address yet. Visit the <a href="/">Home page</a> so I can set it.
-                {{end}}
-            </p>
+    <h1 class="mt-2">About</h1>
+    <div class="row g-3">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 col-md-12 col-sm-12 align-items-stretch">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">EAT &#183; SLEEP &#183; RETREAT</h5>
+                </div>
+                <div class="card-body">Under Development - Aaron Meek. There's a lot to add here...</div>
+                <div class="card-footer">
+                    <ul>
+                        <li>Golang</li>
+                        <li>JavaScript</li>
+                        <li>Bootstrap</li>
+                        <li>CSS & HTML</li>
+                        <li><a href="https://github.com/alexedwards/scs">Session Management</a></li>
+                        <li><a href="https://github.com/justinas/nosurf">No Surf</a></li>
+                        <li><a href="https://github.com/go-chi/chi">Chi</a></li>
+                        <li>PostgreSQL</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+        <div class="col-lg-3"></div>
     </div>
 </div>
+
+
+{{end}}
+
+{{define "js"}}
+
 {{end}}

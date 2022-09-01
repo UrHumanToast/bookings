@@ -20,23 +20,75 @@
             </div>
         </div>
         <div class="col-lg-6 col-sm-12">
-                <h3>Middle Rooms</h3>
-                <p><b><em>The Family Room</em></b>. More than just a standard room, this room offers more comfort to the
-                    smaller
-                    family. This room offers a sofa, a fifty inch TV, two queen beds, a mini fridge, and a full sized
-                    bathing area.</p>
-                <p><b><em>Business Room</em></b>. Still looking to work in peace, but also want a larger area to
-                    yourself? You may conduct your work in peace, and benefit from the larger
-                    office space, along with a queen bed.
-                </p>
+            <h3>Middle Rooms</h3>
+            <p>The <b><em>Family Room</em></b>. More than just a standard room, this room offers more comfort to the
+                smaller
+                family. This room offers a sofa, a fifty inch TV, two queen beds, a mini fridge, and a full sized
+                bathing area.</p>
+            <p>The <b><em>Business Room</em></b>. Still looking to work in peace, but also want a larger area to
+                yourself? You may conduct your work in peace, and benefit from the larger
+                office space, along with a queen bed.
+            </p>
+            <div class="text-center">
+                <button class="btn btn-dark" id="checkAvailability">Check availability</button>
             </div>
         </div>
     </div>
-    {{end}}
 
-    {{define "js"}}
-    <script type="text/javascript">
+</div>
+{{end}}
 
+{{define "js"}}
+<script type="text/javascript">
+    "use strict"
 
-    </script>
-    {{end}}
+    checkAvailability = document.getElementById("checkAvailability").addEventListener("click", function () {
+        let html = `
+        <form id="check-availability-form" action="" method="POST">
+        
+            <legend class="mt-3">Search Availability</legend>
+
+            <div class="datepicker mb-3">
+
+                <div class="row m-0">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <label for="start">Start Date</label>
+                        <input type="date" class="form-control" id="start" required>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <label for="end">End Date</label>
+                        <input type="date" class="form-control" id="end" required>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        `;
+        attention.custom({
+            msg: html,
+            title: "Choose your dates",
+            callback: function (result) {
+
+                // Get the form and store a reference to it in the variable form
+                let form = document.getElementById("check-availability-form");
+                // Create a form data variable that contains all of the inputs from the form
+                let formData = new FormData(form);
+
+                formData.append("csrf_token", "{{.CSRFToken}}")
+
+                fetch("/search-availability-json", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.ok);
+                        console.log(data.message);
+                    })
+            }
+        });
+    });
+
+</script>
+{{end}}

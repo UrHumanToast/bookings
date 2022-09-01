@@ -1,0 +1,37 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<div class="container my-form">
+
+    <form action="/search-availability" method="POST">
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        <fieldset>
+            <legend class="mt-3">Search Availability</legend>
+
+            <div class="row mt-3 ">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <label for="start">Arrival</label>
+                    <input type="date" id="start" class="form-control" name="start" required>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <label for="end">Departure</label>
+                    <input type="date" id="end" class="form-control" name="end" required>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center">
+                <button type="submit" class="btn btn-dark">Search Availability</button>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+{{end}}
+
+{{define "js"}}
+<script type="text/javascript">
+    "use strict"
+</script>
+{{end}}

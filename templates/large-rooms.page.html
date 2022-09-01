@@ -1,7 +1,7 @@
 {{template "base" .}}
 
 {{define "content"}}
-<div class="container mt-3 d-flex ">
+<div class="container mt-3">
     <div class="row justify-content-center">
 
         <div class=" col-lg-6 col-sm-12">
@@ -19,30 +19,80 @@
                 </div>
             </div>
         </div>
-
-
         <div class="col-lg-6 col-sm-12">
             <h3>Large Rooms</h3>
-            <p><b><em>Party Room</em></b>. You plan on bringing a lot of people, and plan on being loud. You need
+            <p>The <b><em>Party Room</em></b>. You plan on bringing a lot of people, and plan on being loud. You need
                 multiple rooms. Consider a room which contians either three
                 queen, or two king beds, a bar, two separate restrooms (one shower, one bathing area), and an eighty
                 inch tv. The room is equiped with high quality sound proofing, and large speakers. This is the
                 designated party room.</p>
-            <p><b><em>The CEO.</em></b> You know what you want, and what you don't want. Have it all, or have it all to
+            <p>The <b><em>CEO.</em></b> You know what you want, and what you don't want. Have it all, or have it all to
                 yourself. We offer an array of these luxury suites, and you bet we have one designed just for you.
                 Beyond the basics (90 inch TV, high quality sound system,full sized restroom with both a shower and a
                 bathing area), our largest
                 suites are equipped with a full bar, kitchen, and more. Call ahead for custom furnishing, such as a
                 grand piano, or for a detailed
                 layout for the room of your choice.</p>
+            <div class="text-center">
+                <button class="btn btn-dark" id="checkAvailability">Check availability</button>
+            </div>
         </div>
     </div>
+
 </div>
 {{end}}
 
 {{define "js"}}
 <script type="text/javascript">
+    "use strict"
 
+    checkAvailability = document.getElementById("checkAvailability").addEventListener("click", function () {
+        let html = `
+        <form id="check-availability-form" action="" method="POST">
+        
+            <legend class="mt-3">Search Availability</legend>
+
+            <div class="datepicker mb-3">
+
+                <div class="row m-0">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <label for="start">Start Date</label>
+                        <input type="date" class="form-control" id="start" required>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <label for="end">End Date</label>
+                        <input type="date" class="form-control" id="end" required>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        `;
+        attention.custom({
+            msg: html,
+            title: "Choose your dates",
+            callback: function (result) {
+
+                // Get the form and store a reference to it in the variable form
+                let form = document.getElementById("check-availability-form");
+                // Create a form data variable that contains all of the inputs from the form
+                let formData = new FormData(form);
+
+                formData.append("csrf_token", "{{.CSRFToken}}")
+
+                fetch("/search-availability-json", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.ok);
+                        console.log(data.message);
+                    })
+            }
+        });
+    });
 
 </script>
 {{end}}
